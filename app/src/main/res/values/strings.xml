@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Android Todo List</string>
+    <string name="btn_add_task">button add task</string>
+</resources>
