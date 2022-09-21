@@ -1,6 +1,7 @@
 package com.example.androidtodolist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,12 +27,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
 
-        // Создание инстанса базы данных
+
         mainViewModel = new MainViewModel(getApplication());
 
         // Работа с RecyclerView
         taskAdapter = new TaskAdapter();
-        taskAdapter.setTasks(mainViewModel.getTasks());
+        mainViewModel.getTasks().observe(this, new Observer<List<Task>>() {
+            @Override
+            public void onChanged(List<Task> tasks) {
+                taskAdapter.setTasks(tasks);
+            }
+        });
         recyclerView.setAdapter(taskAdapter);
 
         // Обработчик события клика по FloatingActionButton

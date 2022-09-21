@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class MainViewModel extends AndroidViewModel {
         tasksDatabase = TasksDatabase.getInstance(application);
     }
 
-    public List<Task> getTasks() {
+    public LiveData<List<Task>> getTasks() {
         return tasksDatabase.tasksDao().getTasks();
     }
 
