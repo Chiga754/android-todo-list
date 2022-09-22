@@ -32,4 +32,15 @@ public class MainViewModel extends AndroidViewModel {
         });
         thread.start();
     }
+
+    public void remove (int id) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("testTest", String.valueOf(id));
+                tasksDatabase.tasksDao().remove(id);
+            }
+        });
+        thread.start();
+    }
 }
